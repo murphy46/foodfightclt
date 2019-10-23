@@ -1,0 +1,28 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  .footer {
+    display: flex;
+    background: #0079b8;
+    height: 30px;
+    color: white;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem;
+    width: 100%;
+    div {
+      align-self: center;
+      a {
+        color: white;
+      }
+    }
+  }
+  .content {
+    flex: 1;
+  }
+  //app-event {
+  //  height: 100%;
+  //}
+}

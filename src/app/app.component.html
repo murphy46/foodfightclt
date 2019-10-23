@@ -1,0 +1,29 @@
+<div class="app-container">
+  <div class="content">
+    <header class="header-6">
+      <div class="header-nav">
+        <a routerLink="/home" routerLinkActive="active" class="nav-link nav-icon">
+          <clr-icon shape="home"></clr-icon>
+        </a>
+        <a routerLink="/vote" routerLinkActive="active" class="nav-link nav-icon">
+          <clr-icon shape="assign-user"></clr-icon>
+        </a>
+        <a routerLink="/events" routerLinkActive="active" class="nav-link nav-icon">
+          <clr-icon shape="calendar"></clr-icon>
+        </a>
+        <a routerLink="/marketplace" routerLinkActive="active" class="nav-link nav-icon">
+          <clr-icon shape="piggy-bank"></clr-icon>
+        </a>
+        <a routerLink="/sumo" routerLinkActive="active" class="nav-link nav-icon">
+          <clr-icon shape="star"></clr-icon>
+        </a>
+      </div>
+    </header>
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer class="footer text-center">
+    <div>Food Fight Tracker v0.2 beta. <a href="mailto:jkeung@captechconsulting.com" target="_blank">
+      Report a <clr-icon shape="bug"></clr-icon></a></div>
+  </footer>
+</div>

@@ -1,0 +1,58 @@
+<div *ngIf="loading" class="spinner-container">
+  <span class="spinner spinner-lg"></span>
+</div>
+<div class="container-fluid">
+  <h1 class="text-center font-weight-bold">CapTech Marketplace</h1>
+  <p class="text-center mx-5 font-weight-bold">Buy it, sell it, get it while it's hot. What is "it", exactly? Whatever you want--the limits are the bounds of your
+    imagination (and HR).
+  </p>
+  <br>
+  <hr>
+  <h2>Browse Goods</h2>
+  <p>Bids start at $10 and bidding closes at 3pm EST on Thursday 11/8. Going once, going twice.. if the highest bidder isn't outbid within 24 hours of their submission, that item is sold. Note that bids are separate donations from general dontations on the home screen. 
+  You only pay for an item if you are the highest bidder, and you will be notified when the bidding period closes.</p>
+  <div class="row">
+    <div class="col-lg-3 col-md-6 col-xs-12" *ngFor="let product of productList">
+      <div class="card">
+        <div class="card-header">
+          {{product.productName}}<span class="label label-info">${{product.currentPrice}}</span>
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <div><span class="font-weight-bold">Seller</span>: {{product.sellerName}}</div>
+            {{product.description}}
+            <p><span class="font-weight-bold">Leading Bidder</span>: {{product.leadBidder || '--'}}</p>
+            <p><span class="font-weight-bold">Time left</span>: {{product.leadBidder || '--'}}</p>
+          </div>
+        </div>
+        <div class="card-footer" *ngIf="!biddingClosed">
+          <button class="btn btn-sm btn-link" (click)="activeForm = product.id">Bid (min ${{product.currentPrice === 10 && !product.leadBidder ? product.currentPrice : product.currentPrice + 10}})
+          </button>
+          <app-bid-form *ngIf="activeForm === product.id" [currentValue]="product.currentPrice" [productId]="product.id" (closeForm)="activeForm = ''"></app-bid-form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="newProductForm" novalidate autocomplete="off" (submit)="onSubmitNewProductForm()">
+    <h3>Have something to sell?</h3>
+    <p *ngIf="biddingClosed">The marketplace is closed. Thanks for participating!</p>
+    <ng-container *ngIf="!biddingClosed">
+      <div class="form-group">
+        <label for="seller-name">Seller Name</label>
+        <input formControlName="sellerName" type="text" id="seller-name" placeholder="Jane Doe">
+      </div>
+      <div class="form-group">
+        <label for="product-name">Product Name</label>
+        <input formControlName="productName" type="text" id="product-name" placeholder="Panthers Tickets">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" placeholder="Two tickets, upper level seating" rows="5"></textarea>
+      </div>
+      <div class="row flex-items-xs-right no-margin">
+        <button type="button" class="btn btn-secondary justify-content-end" (click)="onCancelNewProductForm()">Cancel</button>
+        <button type="submit" class="btn btn-primary justify-content-end" [disabled]="newProductForm.invalid">Submit</button>
+      </div>
+    </ng-container>
+  </form>
+</div>

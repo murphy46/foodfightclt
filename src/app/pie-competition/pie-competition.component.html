@@ -1,0 +1,88 @@
+<div *ngIf="loading" class="spinner-container">
+  <span class="spinner spinner-lg"></span>
+</div>
+<div class="container-fluid card-container">
+  <h1 class="text-center font-weight-bold">Pie a CapTecher</h1>
+  <p class="text-center mx-5">Know a CapTecher you want to pie in the face? <a
+      href="https://app.mobilecause.com/vf/Funds4Food/CapTechConsulting" target="_blank">Donate online</a> between
+    October 23rd and noon on November 9th.
+    $10 per vote, which can be cast below. Whoever donates the most towards an individual will get to do the honors on
+    November 15th at our CapTech Carnival or designate a stand in. The top ten nominees will be pied.</p>
+
+  <hr>
+
+  <h2>Nominees</h2>
+  <div class="row">
+
+    <div class="col-lg-3 col-md-4 col-xs-12" *ngFor="let nominee of nominees">
+      <div class="card">
+        <div class="card-header">
+          ${{nominee.voteTotal * 10 || 0}} raised
+        </div>
+        <div class="card-block">
+          <div class="card-media-block">
+            <img [src]="nominee.imageURL" class="rounded-circle card-media-image">
+            <div class="card-media-description">
+              <span class="card-media-title font-weight-bold">
+                {{nominee.firstName}} {{nominee.lastName}}
+              </span>
+              <span class="card-media-text">
+                {{nominee.title}}
+              </span>
+            </div>
+          </div>
+          <div class="card-text">
+            Leading donor: {{nominee.maxContributorName || '--'}} <span
+              *ngIf="nominee.maxContributorName">(${{nominee.maxVotes *10 || 0}})</span>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-sm btn-link" (click)="activeForm = nominee.id">Vote for {{nominee.firstName}}
+          </button>
+          <app-vote-form *ngIf="activeForm === nominee.id" [nomineeId]="nominee.id"
+            [nomineeName]="nominee.firstName + ' ' + nominee.lastName" (closeForm)="activeForm = ''"></app-vote-form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col-xs-12 col-md-10 col-lg-7">
+      <h3>Want to nominate someone new?</h3>
+      <button class="btn btn-link" (click)="activeForm=true">Nominate a coworker</button>
+      <app-nominate-form *ngIf="activeForm === true" (closeForm)="activeForm = false"></app-nominate-form>
+    </div>
+  </div>
+
+  <div class="row vote-table">
+    <div class="col-xs-12 col-md-10 col-lg-7">
+      <h3>Voting History</h3>
+
+      <clr-datagrid>
+        <clr-dg-column>Donor</clr-dg-column>
+        <clr-dg-column>Nominee</clr-dg-column>
+        <clr-dg-column>Votes</clr-dg-column>
+        <clr-dg-column>Timestamp</clr-dg-column>
+
+        <clr-dg-row *clrDgItems="let vote of votes">
+          <clr-dg-cell>{{vote.donorName}}</clr-dg-cell>
+          <clr-dg-cell>{{vote.nomineeName}}</clr-dg-cell>
+          <clr-dg-cell>{{vote.voteCount}}</clr-dg-cell>
+          <clr-dg-cell>{{vote.timestamp | date:'M/d/yy h:mm a'}}</clr-dg-cell>
+        </clr-dg-row>
+
+        <clr-dg-footer>
+          <clr-dg-pagination [clrDgTotalItems]="votes?.length" #pagination [clrDgPageSize]="10">
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}}
+          </clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+    </div>
+  </div>
+  <p class="text-center mx-5">Are you willing to be pied for a good cause?
+    <a target="_blank" href="mailto:jkeung@captechconsulting.com?Subject=Food Fight Volunteer">Email us</a> to let us
+    know.</p>
+
+</div>

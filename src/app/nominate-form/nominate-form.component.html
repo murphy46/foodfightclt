@@ -1,0 +1,37 @@
+<div *ngIf="loading" class="spinner-container">
+    <span class="spinner spinner-lg"></span>
+</div>
+<form [formGroup]="nomineeForm" novalidate autocomplete="off" (submit)="onSubmitNomination()">
+  <div class="form-group">
+    <label for="nominee-first-name">Nominee First Name</label>
+    <input formControlName="nomineeFirstName" type="text" id="nominee-first-name" placeholder="Nominee First Name">
+  </div>
+  <div class="form-group">
+    <label for="nominee-last-name">Nominee Last Name</label>
+    <input formControlName="nomineeLastName" type="text" id="nominee-last-name" placeholder="Nominee Last Name">
+  </div>
+  <div class="form-group">
+    <label for="nominee-title">Nominee Title</label>
+    <input formControlName="title" type="text" id="title" placeholder="Nominee Title">
+  </div>
+  <div class="form-group">
+    <label for="donor-name">Donor Name</label>
+    <input formControlName="donorName" type="text" id="donor-name" placeholder="Your name">
+  </div>
+  <div class="form-group">
+    <label for="imageUpload">Image Upload</label>
+    <input type="file" formControlName="imageUpload" id="image-upload" (change)="preview($event)" accept="image/*" />
+  </div>
+  <div class="form-group" *ngIf="imgData">
+    <label>Image Preview</label>
+    <img [src]="imgData" height="150">
+  </div>
+  <div class="form-group">
+    <label for="amount">Bid ($10 increments)</label>
+    <input formControlName="amount" type="number" id="amount" placeholder="20">
+  </div>
+  <div class="row flex-items-xs-right">
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    <button type="submit" class="btn btn-primary" [disabled]="nomineeForm.invalid">Submit</button>
+  </div>
+</form>

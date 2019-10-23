@@ -1,0 +1,38 @@
+<div *ngIf="loading" class="spinner-container">
+    <span class="spinner spinner-lg"></span>
+</div>
+<div class="container-fluid">
+    <h1>Sumo Page</h1>
+    <form [formGroup]="newChallengeForm" novalidate autocomplete="off" (submit)="onSubmitNewChallengeForm()">
+            <h3>Submit your challenge!</h3>
+            <p *ngIf="rosterClosed">The roster is full. Thank you for participating.</p>
+            <ng-container *ngIf="!rosterClosed">
+                <div class="form-group">
+                    <label for="challenger-name">Your name</label>
+                    <input formControlName="challengerName" type="text" id="challenger-name" placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="opponent-name">Your opponent's name</label>
+                    <input formControlName="opponentName" type="text" id="opponent-name" placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label style="width:auto;">
+                            <input type="checkbox" formControlName="initials1" name="intials1" required>
+                            I affirm my opponent has agreed to the match.
+                    </label>
+                    <br>
+                </div>
+                <div class="form-group">
+                        <label style="width:auto;">
+                                <input type="checkbox" formControlName="initials2" name="intials2" required>
+                                I affirm my opponent and I have each submitted our $25(minimum) donations.
+                        </label>
+                        <br>
+                    </div>
+                <div class="row flex-items-xs-right no-margin">
+                    <button type="button" class="btn btn-secondary justify-content-end" (click)="onCancelNewChallengeForm()">Cancel</button>
+                    <button type="submit" class="btn btn-primary justify-content-end" [disabled]="newChallengeForm.invalid">Submit</button>
+                </div>
+            </ng-container>
+        </form>
+</div>

@@ -1,0 +1,36 @@
+.card-media-block .card-media-image {
+  max-height: 4rem;
+  max-width: 4rem;
+  height: 4rem;
+  width: 4rem;
+}
+
+p {
+  font-size: 18px;
+  line-height: 18px;
+  &.mx-5 {
+    margin-left: 7vw;
+    margin-right: 7vw;
+  }
+}
+
+.card-container {
+  margin-top: 3vw;
+  margin-bottom: 6vw;
+}
+
+.vote-table {
+  margin-top: 25px;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 25px;
+}
+
+hr {
+  margin: 5vw 3vw;
+}
