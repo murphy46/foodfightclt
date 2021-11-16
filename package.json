@@ -25,7 +25,7 @@
     "@clr/icons": "^0.13.6",
     "@clr/ui": "^0.13.6",
     "@webcomponents/custom-elements": "^1.0.0",
-    "aws-sdk": "^2.548.0",
+    "aws-sdk": "^2.814.0",
     "core-js": "^2.5.4",
     "firebase": "^5.5.5",
     "moment": "^2.22.2",
